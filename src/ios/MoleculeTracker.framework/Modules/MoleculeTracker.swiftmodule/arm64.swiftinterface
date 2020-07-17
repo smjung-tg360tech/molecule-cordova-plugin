@@ -1,0 +1,289 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target arm64-apple-ios8.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MoleculeTracker
+import AdSupport
+import CoreGraphics
+import CoreTelephony
+import Foundation
+@_exported import MoleculeTracker
+import Swift
+import SystemConfiguration
+import UIKit
+import WebKit
+public struct Event : Swift.Codable {
+  public let uuid: Foundation.UUID
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension Event {
+  public init(tracker: MoleculeTracker.MoleculeTracker, action: Swift.String? = nil, url: Foundation.URL? = nil, referer: Foundation.URL? = nil, customTrackingParameters: [Swift.String : Swift.String] = [:], ty: Swift.String? = nil, oid: Swift.String? = "", ti: Swift.String? = nil, isNewInstall: Swift.String? = nil, fit: Swift.String? = nil, firstInstallTime: Swift.String? = nil, lut: Swift.String? = nil, cv: Swift.String? = nil, av: Swift.String? = nil, pcv: Swift.String? = nil, pav: Swift.String? = nil, tId: Swift.String? = nil, tcId: Swift.String? = nil, tUri: Swift.String? = nil, itl: Swift.String? = nil, mul: Swift.String? = nil, sch: Swift.String? = nil, rrf: Swift.String? = nil, irf: Swift.String? = nil, ity: Swift.String? = nil, ist: Swift.String? = nil, ibt: Swift.String? = nil, rct: Swift.String? = nil, sst: Swift.String? = nil, set: Swift.String? = nil, sdt: Swift.String? = nil)
+}
+open class KeychainWrapper {
+  @available(*, deprecated, message: "KeychainWrapper.defaultKeychainWrapper is deprecated since version 2.2.1, use KeychainWrapper.standard instead")
+  public static let defaultKeychainWrapper: MoleculeTracker.KeychainWrapper
+  public static let standard: MoleculeTracker.KeychainWrapper
+  public var serviceName: Swift.String {
+    get
+    }
+  public var accessGroup: Swift.String? {
+    get
+    }
+  public init(serviceName: Swift.String, accessGroup: Swift.String? = nil)
+  open func hasValue(forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool
+  open func accessibilityOfKey(_ key: Swift.String) -> MoleculeTracker.KeychainItemAccessibility?
+  open func allKeys() -> Swift.Set<Swift.String>
+  open func integer(forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Int?
+  open func float(forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Float?
+  open func double(forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Double?
+  open func bool(forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool?
+  open func string(forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.String?
+  open func object(forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Foundation.NSCoding?
+  open func data(forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Foundation.Data?
+  open func dataRef(forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Foundation.Data?
+  @discardableResult
+  open func set(_ value: Swift.Int, forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Swift.Float, forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Swift.Double, forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Swift.Bool, forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Swift.String, forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Foundation.NSCoding, forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Foundation.Data, forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @available(*, deprecated, message: "remove is deprecated since version 2.2.1, use removeObject instead")
+  @discardableResult
+  open func remove(key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func removeObject(forKey key: Swift.String, withAccessibility accessibility: MoleculeTracker.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func removeAllKeys() -> Swift.Bool
+  open class func wipeKeychain()
+  @objc deinit
+}
+@objc final public class MemoryQueue : ObjectiveC.NSObject, MoleculeTracker.Queue {
+  final public var eventCount: Swift.Int {
+    get
+  }
+  final public func enqueue(events: [MoleculeTracker.Event], completion: (() -> ())?)
+  final public func first(limit: Swift.Int, completion: ([MoleculeTracker.Event]) -> ())
+  final public func remove(events: [MoleculeTracker.Event], completion: () -> ())
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc final public class Device : ObjectiveC.NSObject {
+  @objc public static func makeCurrentDevice() -> MoleculeTracker.Device
+  @objc final public let platform: Swift.String
+  @objc final public let humanReadablePlatformName: Swift.String?
+  @objc final public let osVersion: Swift.String
+  @objc final public let screenSize: CoreGraphics.CGSize
+  @objc final public let nativeScreenSize: CoreGraphics.CGSize
+  required public init(platform: Swift.String, humanReadablePlatformName: Swift.String? = nil, osVersion: Swift.String, screenSize: CoreGraphics.CGSize, nativeScreenSize: CoreGraphics.CGSize? = nil)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum KeychainItemAccessibility {
+  @available(iOS 4, *)
+  case afterFirstUnlock
+  @available(iOS 4, *)
+  case afterFirstUnlockThisDeviceOnly
+  @available(iOS 4, *)
+  case always
+  @available(iOS 8, *)
+  case whenPasscodeSetThisDeviceOnly
+  @available(iOS 4, *)
+  case alwaysThisDeviceOnly
+  @available(iOS 4, *)
+  case whenUnlocked
+  @available(iOS 4, *)
+  case whenUnlockedThisDeviceOnly
+  public static func == (a: MoleculeTracker.KeychainItemAccessibility, b: MoleculeTracker.KeychainItemAccessibility) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public protocol Queue {
+  var eventCount: Swift.Int { get }
+  mutating func enqueue(events: [MoleculeTracker.Event], completion: (() -> Swift.Void)?)
+  func first(limit: Swift.Int, completion: @escaping ([MoleculeTracker.Event]) -> Swift.Void)
+  mutating func remove(events: [MoleculeTracker.Event], completion: @escaping () -> Swift.Void)
+}
+public protocol Dispatcher {
+  var baseURL: Foundation.URL { get }
+  var userAgent: Swift.String? { get }
+  func send(events: [MoleculeTracker.Event], success: @escaping () -> (), failure: @escaping (Swift.Error) -> ())
+}
+@objc public enum LogLevel : Swift.Int {
+  case verbose = 10
+  case debug = 20
+  case info = 30
+  case warning = 40
+  case error = 50
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol Logger {
+  @objc func log(_ message: @autoclosure () -> Swift.String, with level: MoleculeTracker.LogLevel, file: Swift.String, function: Swift.String, line: Swift.Int)
+}
+final public class DisabledLogger : MoleculeTracker.Logger {
+  @objc final public func log(_ message: @autoclosure () -> Swift.String, with level: MoleculeTracker.LogLevel, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+  @objc deinit
+}
+@objc final public class DefaultLogger : ObjectiveC.NSObject, MoleculeTracker.Logger {
+  @objc public init(minLevel: MoleculeTracker.LogLevel)
+  @objc final public func log(_ message: @autoclosure () -> Swift.String, with level: MoleculeTracker.LogLevel, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct CustomVariable : Swift.Codable {
+  public init(index: Swift.UInt, name: Swift.String, value: Swift.String)
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension WKWebView {
+  public func mcload(_tracker: MoleculeTracker.MoleculeTracker, request: Foundation.URLRequest)
+}
+public struct CustomDimension : Swift.Codable {
+  public init(index: Swift.Int, value: Swift.String)
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct OrderItem : Swift.Codable {
+  public init(sku: Swift.String, name: Swift.String = "", category: Swift.String = "", price: Swift.Float = 0.0, quantity: Swift.Int = 1)
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@objc public class MoleculeTracker : ObjectiveC.NSObject {
+  @objc public var isOptedOut: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public var userId: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @available(*, deprecated, message: "use userId instead")
+  @objc public var visitorId: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc public var forcedVisitorId: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc public var logger: MoleculeTracker.Logger
+  @objc public var contentBase: Foundation.URL?
+  required public init(mid: Swift.String, mky: Swift.String, queue: MoleculeTracker.Queue, dispatcher: MoleculeTracker.Dispatcher)
+  @objc convenience public init(mid: Swift.String, mky: Swift.String, baseURL: Foundation.URL, userAgent: Swift.String? = nil)
+  @objc public func dispatch()
+  @objc public var dispatchInterval: Foundation.TimeInterval {
+    @objc get
+    @objc set
+  }
+  @objc public func setCartList(str: Swift.String?)
+  @objc public func setMudList(str: Swift.String?)
+  @objc public func setSearchKeyword(str: Swift.String?)
+  @objc public func setItemList(str: Swift.String?)
+  @objc public func setCustomView(str: Swift.String)
+  @objc public func setActiveView(str: Swift.String)
+  @objc public func setOrderList(str: Swift.String?)
+  @objc public func startActivity(str: Swift.String)
+  @objc public func login()
+  @objc public func join()
+  @objc public func track()
+  @objc public func trackContentImpression(name: Swift.String, piece: Swift.String?, target: Swift.String)
+  @objc public func trackContentInteraction(name: Swift.String, interaction: Swift.String)
+  @objc public func getIdfa() -> Swift.String?
+  @objc public func getMaid() -> Swift.String?
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension MoleculeTracker {
+  public func startNewSession()
+}
+extension MoleculeTracker {
+  public func track(_ event: MoleculeTracker.Event)
+  public func track(view: Swift.String, url: Foundation.URL? = nil)
+  public func track(eventWithCategory category: Swift.String, action: Swift.String, name: Swift.String? = nil, value: Swift.Float? = nil, url: Foundation.URL? = nil)
+}
+extension MoleculeTracker {
+  public func trackSearch(query: Swift.String, url: Foundation.URL? = nil)
+}
+extension MoleculeTracker {
+  @available(*, deprecated, message: "use setDimension: instead")
+  public func set(value: Swift.String, forIndex index: Swift.Int)
+  public func set(dimension: MoleculeTracker.CustomDimension)
+  @objc dynamic public func setDimension(_ value: Swift.String, forIndex index: Swift.Int)
+  @objc dynamic public func remove(dimensionAtIndex index: Swift.Int)
+}
+extension MoleculeTracker {
+  public func set(customVariable: MoleculeTracker.CustomVariable)
+  @objc dynamic public func setCustomVariable(withIndex index: Swift.UInt, name: Swift.String, value: Swift.String)
+  @objc dynamic public func removeCustomVariable(withIndex index: Swift.UInt)
+}
+extension MoleculeTracker {
+  @objc dynamic public func track(eventWithCategory category: Swift.String, action: Swift.String, name: Swift.String? = nil, number: Foundation.NSNumber? = nil, url: Foundation.URL? = nil)
+  @available(*, deprecated, message: "use trackEventWithCategory:action:name:number:url instead")
+  @objc dynamic public func track(eventWithCategory category: Swift.String, action: Swift.String, name: Swift.String? = nil, number: Foundation.NSNumber? = nil)
+  @objc dynamic public func trackSearch(query: Swift.String, category: Swift.String?, resultCount: Swift.Int, url: Foundation.URL? = nil)
+}
+extension MoleculeTracker {
+  @objc dynamic public func copyFromOldSharedInstance()
+}
+public struct Application {
+  public static func makeCurrentApplication() -> MoleculeTracker.Application
+  public let bundleDisplayName: Swift.String?
+  public let bundleName: Swift.String?
+  public let bundleIdentifier: Swift.String?
+  public let bundleVersion: Swift.String?
+  public let bundleShortVersion: Swift.String?
+}
+final public class URLSessionDispatcher : MoleculeTracker.Dispatcher {
+  final public let baseURL: Foundation.URL
+  final public var userAgent: Swift.String? {
+    get
+    }
+  public init(baseURL: Foundation.URL, userAgent: Swift.String? = nil, timeout: Foundation.TimeInterval = 5.0)
+  final public func send(events: [MoleculeTracker.Event], success: @escaping () -> (), failure: @escaping (Swift.Error) -> ())
+  @objc deinit
+}
+public enum NetworkConnection {
+  case noConnection
+  case WiFi
+  case WWAN
+  public var description: Swift.String {
+    get
+  }
+  public static func == (a: MoleculeTracker.NetworkConnection, b: MoleculeTracker.NetworkConnection) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public class NetworkMonitor {
+  public static let networkChangedNotificationName: Foundation.Notification.Name
+  public var cellularNetworkType: Swift.String? {
+    get
+  }
+  public var currentNetworkConnection: MoleculeTracker.NetworkConnection {
+    get
+  }
+  public init?()
+  public func startMonitoringNetworkChanges() -> Swift.Bool
+  public func stopMonitoringNetworkChanges()
+  @objc deinit
+}
+extension MoleculeTracker.KeychainItemAccessibility : Swift.Equatable {}
+extension MoleculeTracker.KeychainItemAccessibility : Swift.Hashable {}
+extension MoleculeTracker.LogLevel : Swift.Equatable {}
+extension MoleculeTracker.LogLevel : Swift.Hashable {}
+extension MoleculeTracker.LogLevel : Swift.RawRepresentable {}
+extension MoleculeTracker.NetworkConnection : Swift.Equatable {}
+extension MoleculeTracker.NetworkConnection : Swift.Hashable {}

@@ -1,0 +1,18 @@
+{
+  "name": "molecule-cordova-plugin",
+  "version": "0.9.0",
+  "description": "",
+  "cordova": {
+    "id": "com.tg360.molecule",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "",
+  "license": "ISC"
+}

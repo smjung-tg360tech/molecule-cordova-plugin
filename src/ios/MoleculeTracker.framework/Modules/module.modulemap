@@ -1,0 +1,11 @@
+framework module MoleculeTracker {
+  umbrella header "MoleculeTracker.h"
+
+  export *
+  module * { export * }
+}
+
+module MoleculeTracker.Swift {
+    header "MoleculeTracker-Swift.h"
+    requires objc
+}

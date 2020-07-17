@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.tg360.molecule" version="0.9.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>molecule-cordova-plugin</name>
+    <js-module name="MoleculeCordovaAgent" src="www/molecule-cordova-plugin.js">
+        <clobbers target="moleculeAgent" />
+    </js-module>
+
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="MoleculeCordovaAgent">
+                <param name="android-package" value="com.molecule.agent.MoleculeCordovaAgent" onload="true"/>
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml">
+
+        </config-file>
+        <source-file src="src/android/molecule.sdk.jar" target-dir="libs" framework="true"/>
+        <framework custom="true" src="src/android/molecule.gradle" type="gradleReference"/>
+    </platform>
+
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="MoleculeCordovaAgent">
+                <param name="ios-package" value="CDVMoleculeAgent" onload="true"/>
+            </feature>
+            <preference name="WKWebViewOnly" value="true" /> 
+            <feature name="CDVWKWebViewEngine"> 
+                <param name="ios-package" value="CDVWKWebViewEngine" /> 
+            </feature> 
+            <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+        </config-file>
+
+        <preference name="UseSwiftLanguageVersion" value="5"/>
+        <source-file src="src/ios/CDVMoleculeAgent.swift"/>  
+        <source-file src="src/ios/Bridging-Header.h"/>        
+        <framework src="src/ios/MoleculeTracker.framework" custom="true" embed="true"/>
+
+    </platform>
+</plugin>
